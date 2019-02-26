@@ -2,7 +2,7 @@ FROM openjdk:11-jre-slim
 
 MAINTAINER Joel Tobey <joel@joeltobey.com>
 
-ARG DEBUG=false
+ENV DEBUG_MODE false
 
 RUN set -x && \
     addgroup -gid 1000 appuser && \

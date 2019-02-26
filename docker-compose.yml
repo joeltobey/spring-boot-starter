@@ -15,9 +15,9 @@ services:
       - ./.gradle-docker:/home/appuser/.gradle
     working_dir: /app
     user: appuser
-    command: sh /home/appuser/build/entrypoint.sh
+    command: bash /home/appuser/build/entrypoint.sh
     environment:
-      DEBUG_MODE: true
+      DEBUG_MODE: 'false'
 #  db:
 #    image: mysql:8
 #    container_name: spring-boot-starter-db
