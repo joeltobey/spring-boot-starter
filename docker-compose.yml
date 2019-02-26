@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+  backend:
+#    depends_on:
+#      - db
+    container_name: spring-boot-starter-backend
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    volumes:
+      - .:/app
+      - ./.gradle-docker:/home/appuser/.gradle
+    working_dir: /app
+    user: appuser
+    command: sh /home/appuser/build/entrypoint.sh
+    environment:
+      DEBUG_MODE: true
+#  db:
+#    image: mysql:8
+#    container_name: spring-boot-starter-db
+#    volumes:
+#    - db-volume:/var/lib/mysql
+#    restart: always
+#    ports:
+#    - "3306:3306"
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: spring_boot_starter
+#      MYSQL_USER: root
+#      MYSQL_PASSWORD: root
+#volumes:
+#  db-volume:

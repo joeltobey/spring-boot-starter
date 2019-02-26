@@ -1,0 +1,25 @@
+FROM openjdk:11-jre-slim
+
+MAINTAINER Joel Tobey <joel@joeltobey.com>
+
+ARG DEBUG=false
+
+RUN set -x && \
+    addgroup -gid 1000 appuser && \
+    adduser -uid 1000 -gid 1000 appuser && \
+    cd /home/appuser && \
+    mkdir .gradle
+
+ENV HOME /home/appuser
+
+# BUILD_DIR = WHERE runtime scripts go
+ENV BUILD_DIR $HOME/build
+WORKDIR $BUILD_DIR
+
+COPY docker/ $BUILD_DIR/
+RUN ls -la $BUILD_DIR
+RUN chmod +x $BUILD_DIR/*.sh
+
+# APP_DIR = the directory where the application runs
+ENV APP_DIR /app
+WORKDIR $APP_DIR
